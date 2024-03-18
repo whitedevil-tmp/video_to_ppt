@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+tmp
+.venv
+.idea
+bk.py
+out.ppt
