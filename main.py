@@ -7,11 +7,27 @@ import cv2
 from skimage.metrics import structural_similarity
 
 #############################################################
-url = "https://www.youtube.com/watch?v=aabbcc"
-tmp_folder = "tmp"
-frames_per_second_to_extract=0.5
-time_periods = [(0, 36000)] # format [(start1, end1),(start2,end2)]
-debug=True
+default_tmp_folder = "tmp"
+default_frames_per_second_to_extract = 0.5
+default_time_period=[(0, 36000)]
+
+# Get user input
+url = input("Enter the YouTube video URL: ")
+tmp_folder = input(f"Enter the temporary folder path (default: {default_tmp_folder}): ") or default_tmp_folder
+frames_per_second_to_extract = input(f"Enter the frames per second to extract (default: {default_frames_per_second_to_extract}): ") or default_frames_per_second_to_extract
+
+time_periods = []
+time_period_str = input(f"Enter time periods (default: {default_time_period}) or leave empty to use default: ")
+if time_period_str:
+    try:
+        time_periods = eval(time_period_str)
+    except Exception as e:
+        print("Error parsing time periods:", e)
+        time_periods = default_time_period
+else:
+    time_periods = default_time_period
+
+debug = input(f"Enable debug mode? (y/n, default: No): ").lower() == "y"
 #############################################################
 
 
